@@ -54,6 +54,7 @@ midi.txt
 # Unity Ignores
 Library
 ProjectSettings
+UnityPackageManager
 
 # Unity Files
 *.csproj
