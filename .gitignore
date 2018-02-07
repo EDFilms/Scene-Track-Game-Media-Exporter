@@ -58,17 +58,8 @@ UnityPackageManager
 
 # Unity Files
 *.csproj
-Assembly-CSharp-Editor.csproj
-Assembly-CSharp-Editor-firstpass.csproj
-Assembly-CSharp-firstpass.csproj
-Assembly-CSharp.csproj
-SceneTrack.Unity.sln
-SceneTrack.Unity.userprefs
-GCAP.Unity.userprefs
-GCAP.Unity.sln
+*.sln
+*.userprefs
 
 # Platform Files
 .DS_Store
-
-
-
