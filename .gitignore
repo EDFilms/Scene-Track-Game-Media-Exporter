@@ -52,10 +52,9 @@ midi.txt
 
 
 # Unity Ignores
-Library/
+/Library
 ProjectSettings
 UnityPackageManager
-
 
 # Unity Files
 *.csproj
