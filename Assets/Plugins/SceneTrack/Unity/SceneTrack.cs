@@ -3,24 +3,26 @@
 /**
  * SceneTrack.cs
  *
- * [[[BREIF DESCRIPTION]]]
+ * Static controller for SceneTrack project integration.
  * 
  * @author  dotBunny <hello@dotbunny.com>
  * @version 1
- * @since     1.0.0
+ * @since	1.0.0
  */
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-
 using SceneTrack;
 using UnityEditor;
 using UnityEngine;
 
 namespace SceneTrack.Unity
 {
+    /// <summary>
+    /// SceneTrack System Controller
+    /// </summary>
     public static class System
     {
         public static string FilenameOverride = string.Empty;

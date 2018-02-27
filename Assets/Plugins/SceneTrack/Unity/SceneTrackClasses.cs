@@ -1,13 +1,13 @@
 ﻿// Copyright 2018 E*D Films. All Rights Reserved.
 
 /**
- * SceneTrack.cs
+ * SceneTrackClasses.cs
  *
- * [[[BREIF DESCRIPTION]]]
+ * Type definitions of objects stored in SceneTrack
  * 
  * @author  dotBunny <hello@dotbunny.com>
  * @version 1
- * @since     1.0.0
+ * @since	  1.0.0
  */
 
 using System;
