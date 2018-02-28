@@ -24,14 +24,14 @@ namespace SceneTrack.Unity
         {
             get
             {
-                return Application.dataPath + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + "SceneTrack" + Path.DirectorySeparatorChar ;
+                return Path.GetFullPath(Application.dataPath + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + "SceneTrack") + Path.DirectorySeparatorChar ;
             }
 
         }
 
         public static string TempFolder
         {
-            get { return Folder + Path.DirectorySeparatorChar + "Temp" + Path.DirectorySeparatorChar; }
+            get { return Folder + "Temp" + Path.DirectorySeparatorChar; }
         }
 
         /// <summary>
