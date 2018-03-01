@@ -1,17 +1,14 @@
 ﻿// Copyright 2018 E*D Films. All Rights Reserved.
 
 /**
- * SceneTrack.cs
+ * SceneTrackObject.cs
  *
- * [[[BREIF DESCRIPTION]]]
+ * Object used to track a Unity GameObject
  * 
  * @author  dotBunny <hello@dotbunny.com>
  * @version 1
- * @since     1.0.0
+ * @since	1.0.0
  */
-
-#define WIP
-
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -19,7 +16,6 @@ using UnityEngine;
 
 namespace SceneTrack.Unity
 {
-    // TODO: VALIDATE 100% that its top down initialization
     public class SceneTrackObject : MonoBehaviour
     {
 
@@ -401,13 +397,10 @@ namespace SceneTrack.Unity
                 Object.SetValue_uint32(_meshRendererHandle, Classes.StandardMeshRenderer.Parent, TransformHandle);
 
                 // Assign Materials (shared references as found)
-// TODO: This causes issues with materials, it is diabled till we resolve
-#if WIP
                 if (_materialHandles.Length > 0)
                 {
                   Helper.SubmitArray(_meshRendererHandle, Classes.StandardMeshRenderer.Materials, _materialHandles, Helper.GetTypeMemorySize(typeof(uint), 1));
                 }
-#endif
             }
             
         }
@@ -418,8 +411,6 @@ namespace SceneTrack.Unity
         /// <param name="materials">Array of materials used in the mesh.</param>
         private void InitMaterials(Material[] materials)
         {
-// TODO: This causes issues with materials, it is diabled till we resolve
-#if WIP
             var materialHandles = new List<uint>(materials.Length);
             foreach (var m in materials)
             {
@@ -447,8 +438,6 @@ namespace SceneTrack.Unity
              materialHandles.Add(materialHandle);
             }
             _materialHandles = materialHandles.ToArray();
-
-#endif
         }
 
         /// <summary>

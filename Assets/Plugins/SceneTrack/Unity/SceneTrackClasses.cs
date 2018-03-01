@@ -16,6 +16,9 @@ using UnityEngine;
 
 namespace SceneTrack.Unity
 {
+    /// <summary>
+    /// Custom Data Types
+    /// </summary>
     public static class Classes
     {
 

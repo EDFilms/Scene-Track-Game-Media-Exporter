@@ -1,14 +1,15 @@
 ﻿// Copyright 2018 E*D Films. All Rights Reserved.
 
 /**
- * SceneTrack.cs
+ * SceneTrackLog.cs
  *
- * [[[BREIF DESCRIPTION]]]
+ * Internal logging functions
  * 
  * @author  dotBunny <hello@dotbunny.com>
  * @version 1
- * @since     1.0.0
+ * @since	1.0.0
  */
+
 
 using System.IO;
 using UnityEngine;

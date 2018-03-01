@@ -46,6 +46,9 @@ namespace SceneTrack.Unity
 
         public static uint FrameCount { get; private set; }
 
+        /// <summary>
+        /// Called when play mode is entered, sets up object in SceneTrack core
+        /// </summary>
         public static void EnterPlayMode()
         {
             // Bail Out Check
@@ -78,7 +81,9 @@ namespace SceneTrack.Unity
             InPlayMode = true;
         }
 
-
+        /// <summary>
+        /// Called when exiting play mode
+        /// </summary>
         public static void ExitPlayMode()
         {
             // Bail Out Check
@@ -93,6 +98,11 @@ namespace SceneTrack.Unity
             InPlayMode = false;
         }
 
+        /// <summary>
+        /// Submit recording to core
+        /// </summary>
+        /// <param name="frameCount">Frame which data is at</param>
+        /// <param name="deltaTime">Delta time for data</param>
         public static void SubmitRecording(uint frameCount, float deltaTime)
         {
             if ( frameCount != FrameCount ) return;
@@ -103,6 +113,9 @@ namespace SceneTrack.Unity
             FrameCount++;
         }
 
+        /// <summary>
+        /// Cache known objects in the scene
+        /// </summary>
         public static void CacheKnownObjects()
         {
             CachedKnownObjects.Clear();

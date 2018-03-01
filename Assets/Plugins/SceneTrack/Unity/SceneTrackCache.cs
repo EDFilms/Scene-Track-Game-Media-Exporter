@@ -1,13 +1,13 @@
 ﻿// Copyright 2018 E*D Films. All Rights Reserved.
 
 /**
- * SceneTrack.cs
+ * SceneTrackCache.cs
  *
- * [[[BREIF DESCRIPTION]]]
+ * Pathing and cache information used with SceneTrack
  * 
  * @author  dotBunny <hello@dotbunny.com>
  * @version 1
- * @since     1.0.0
+ * @since	1.0.0
  */
 
 using System.IO;
@@ -93,6 +93,9 @@ namespace SceneTrack.Unity
             return "Take_" + GetNextTakeNumber().ToString();
         }
 
+        /// <summary>
+        /// Initialize Temp Folder
+        /// </summary>
         public static void InitTemp()
         {
             if (!Directory.Exists(TempFolder))

@@ -1,15 +1,18 @@
 ﻿// Copyright 2018 E*D Films. All Rights Reserved.
 
 /**
- * SceneTrack.cs
+ * SceneTrackHelper.cs
  *
- * [[[BREIF DESCRIPTION]]]
+ * Runtime support functions to assist SceneTrack
  * 
  * @author  dotBunny <hello@dotbunny.com>
  * @version 1
- * @since     1.0.0
+ * @since	1.0.0
  */
 
+/// <summary>
+/// Tell SceneTrack to make fast copies of Matrix4x4
+/// </summary>
 #define ST_FAST_COPY_MATRIX44
 
 using System;
@@ -23,6 +26,12 @@ namespace SceneTrack.Unity
 {
     public static class Helper
     {
+        /// <summary>
+        /// Get the memory size of a type.
+        /// </summary>
+        /// <param name="objectType">Type</param>
+        /// <param name="elements">Number of elements</param>
+        /// <returns></returns>
         public static uint GetTypeMemorySize(global::System.Type objectType, uint elements)
         {
             if (objectType == typeof(Single))
@@ -76,7 +85,7 @@ namespace SceneTrack.Unity
         {
             return new Vector4(color.r,color.g, color.b, color.a);
         }
-    
+
         public static void SubmitArray(uint objectHandle, uint componentHandle, byte[] array, uint stride)
         {
             var handle = GCHandle.Alloc(array, GCHandleType.Pinned);
