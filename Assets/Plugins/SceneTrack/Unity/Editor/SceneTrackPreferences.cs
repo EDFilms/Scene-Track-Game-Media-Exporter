@@ -1,4 +1,16 @@
-﻿using System;
+﻿// Copyright 2018 E*D Films. All Rights Reserved.
+
+/**
+ * SceneTrackPreferences.cs
+ *
+ * SceneTrack preferences reference
+ * 
+ * @author  dotBunny <hello@dotbunny.com>
+ * @version 1
+ * @since   1.0.0
+ */
+
+using System;
 using System.IO;
 using System.Text;
 using UnityEngine;
@@ -6,8 +18,6 @@ using UnityEditor;
 
 namespace SceneTrack.Unity.Editor
 {
-
-
     public static class SceneTrackPreferences
     {
         private static int _currentTab = 0;
@@ -66,27 +76,27 @@ namespace SceneTrack.Unity.Editor
       
             if (GUILayout.Toggle(_currentTab == 0, "Recording", EditorStyles.miniButtonLeft))
             {
-              _currentTab = 0;
+                _currentTab = 0;
             }
             
             if (GUILayout.Toggle(_currentTab == 1, "Animation", EditorStyles.miniButtonMid))
             {
-              _currentTab = 1;
+                _currentTab = 1;
             }
             
             if (GUILayout.Toggle(_currentTab == 2, "Events", EditorStyles.miniButtonMid))
             {
-              _currentTab = 2;
+                _currentTab = 2;
             }
             
             if (GUILayout.Toggle(_currentTab == 3, "Video", EditorStyles.miniButtonMid))
             {
-              _currentTab = 3;
+                _currentTab = 3;
             }
             
             if (GUILayout.Toggle(_currentTab == 4, "About", EditorStyles.miniButtonRight))
             {
-              _currentTab = 4;
+                _currentTab = 4;
             }
             EditorGUILayout.EndHorizontal();
 
@@ -110,39 +120,39 @@ namespace SceneTrack.Unity.Editor
                 default:
                 {
                     EditorGUILayout.BeginVertical();
-                      EditorGUILayout.BeginVertical();
+                        EditorGUILayout.BeginVertical();
                         EditorGUILayout.BeginHorizontal();
-                          GUILayout.FlexibleSpace();
-                          if (GUILayout.Button("Default", EditorStyles.miniButton))
-                          {
-                              AppendRecordFrames = 2;
-                              MemoryReserveFramePool = 0;
-                              MemoryReserveFrameDataPool = 0;
-                          }
-                          EditorGUILayout.EndHorizontal();
+                            GUILayout.FlexibleSpace();
+                            if (GUILayout.Button("Default", EditorStyles.miniButton))
+                            {
+                                AppendRecordFrames = 2;
+                                MemoryReserveFramePool = 0;
+                                MemoryReserveFrameDataPool = 0;
+                            }
+                            EditorGUILayout.EndHorizontal();
 
-                          OpenAfterExporting = EditorGUILayout.Toggle("Open Output after Exporting", OpenAfterExporting);
+                            OpenAfterExporting = EditorGUILayout.Toggle("Open Output after Exporting", OpenAfterExporting);
                     
                         EditorGUILayout.EndVertical();
 
                         GUILayout.FlexibleSpace();
 
                         EditorGUILayout.BeginVertical();
-                          GUILayout.Label("Advanced Recording Settings", EditorStyles.boldLabel);
+                            GUILayout.Label("Advanced Recording Settings", EditorStyles.boldLabel);
 
-                          AppendRecordFrames = Mathf.Clamp(EditorGUILayout.IntPopup("Save Frame Time", AppendRecordFrames, AppendRecordFramesStr, AppendRecordFramesInt), 1, 60);
+                            AppendRecordFrames = Mathf.Clamp(EditorGUILayout.IntPopup("Save Frame Time", AppendRecordFrames, AppendRecordFramesStr, AppendRecordFramesInt), 1, 60);
                     
-                          if (AppendRecordFrames > 2)
-                          {
+                            if (AppendRecordFrames > 2)
+                            {
                             GUILayout.BeginHorizontal();
                             GUILayout.Label("Warning:\nLonger save times will result in increased memory usage.\nThis can cause reduced recording performance or errors.", EditorStyles.miniLabel);
                             GUILayout.EndHorizontal();
-                          }
+                            }
                     
-                          MemoryReserveFramePool = Mathf.Clamp(EditorGUILayout.IntField("Extra Frame Pools", MemoryReserveFramePool), 0, 16);
-                          MemoryReserveFrameDataPool = Mathf.Clamp(EditorGUILayout.IntField("Extra Frame Data Pools", MemoryReserveFrameDataPool), 0, 16);
+                            MemoryReserveFramePool = Mathf.Clamp(EditorGUILayout.IntField("Extra Frame Pools", MemoryReserveFramePool), 0, 16);
+                            MemoryReserveFrameDataPool = Mathf.Clamp(EditorGUILayout.IntField("Extra Frame Data Pools", MemoryReserveFrameDataPool), 0, 16);
 
-                          GUILayout.Space(60);
+                            GUILayout.Space(60);
 
                         EditorGUILayout.EndVertical();
                     EditorGUILayout.EndVertical();
@@ -151,127 +161,121 @@ namespace SceneTrack.Unity.Editor
 
                 }
             }
-      
+        
             EditorGUILayout.EndVertical();
         }
 
+        /// <summary>
+        /// Displayed Version Info
+        /// </summary>
+        /// <returns>Release Name</returns>
         const String ReleaseVersion = "SceneTrack (Preview) 0.3";
 
         static void About()
         {
-          StringBuilder stVersion, fbxVersion, midiVersion, videoVersion, versions;
+            StringBuilder stVersion, fbxVersion, midiVersion, videoVersion, versions;
 
-          GUILayout.Label(ReleaseVersion, EditorStyles.boldLabel);
+            GUILayout.Label(ReleaseVersion, EditorStyles.boldLabel);
 
-          versions = new StringBuilder(200);
+            versions = new StringBuilder(200);
 
-          try
-          {
-            stVersion = new StringBuilder(SceneTrack.Library.GetVersionStrCapacity());
-            int r = SceneTrack.Library.GetVersion(stVersion, (int) stVersion.Capacity);
-            if (r == 0)
+            try
             {
-              if (Application.platform == RuntimePlatform.WindowsEditor)
-              {
-                versions.Append("SceneTrack.dll: ");
-              }
-              else if (Application.platform == RuntimePlatform.OSXEditor)
-              {
-                versions.Append("SceneTrack.bundle: ");
-              }
-              versions.Append(stVersion);
-              versions.AppendLine();
+                stVersion = new StringBuilder(SceneTrack.Library.GetVersionStrCapacity());
+                int r = SceneTrack.Library.GetVersion(stVersion, (int) stVersion.Capacity);
+                if (r == 0)
+                {
+                    if (Application.platform == RuntimePlatform.WindowsEditor)
+                    {
+                        versions.Append("SceneTrack.dll: ");
+                    }
+                    else if (Application.platform == RuntimePlatform.OSXEditor)
+                    {
+                        versions.Append("SceneTrack.bundle: ");
+                    }
+                    versions.Append(stVersion);
+                    versions.AppendLine();
+                }
             }
-          }
-          catch
-          {
-            // ignored
-          }
-          
-          try
-          {
-            fbxVersion = new StringBuilder(SceneTrackFbx.Library.GetVersionStrCapacity());
-            int r = SceneTrackFbx.Library.GetVersion(fbxVersion, (int) fbxVersion.Capacity);
-            if (r == 0)
+            catch
             {
-              if (Application.platform == RuntimePlatform.WindowsEditor)
-              {
-                versions.Append("SceneTrackFbx.dll: ");
-              }
-              else if (Application.platform == RuntimePlatform.OSXEditor)
-              {
-                versions.Append("SceneTrackFbx.bundle: ");
-              }
-              versions.Append(fbxVersion);
-              versions.AppendLine();
+                // ignored
             }
-          }
-          catch
-          {
-            // ignored
-          }
-          
-          try
-          {
-            midiVersion = new StringBuilder(SceneTrackMidi.Library.GetVersionStrCapacity());
-            int r = SceneTrackMidi.Library.GetVersion(midiVersion, (int) midiVersion.Capacity);
-            if (r == 0)
+            
+            try
             {
-              if (Application.platform == RuntimePlatform.WindowsEditor)
-              {
-                versions.Append("SceneTrackMidi.dll: ");
-              }
-              else if (Application.platform == RuntimePlatform.OSXEditor)
-              {
-                versions.Append("SceneTrackMidi.bundle: ");
-              }
-              versions.Append(midiVersion);
-              versions.AppendLine();
+                fbxVersion = new StringBuilder(SceneTrackFbx.Library.GetVersionStrCapacity());
+                int r = SceneTrackFbx.Library.GetVersion(fbxVersion, (int) fbxVersion.Capacity);
+                if (r == 0)
+                {
+                    if (Application.platform == RuntimePlatform.WindowsEditor)
+                    {
+                        versions.Append("SceneTrackFbx.dll: ");
+                    }
+                    else if (Application.platform == RuntimePlatform.OSXEditor)
+                    {
+                        versions.Append("SceneTrackFbx.bundle: ");
+                    }
+                    versions.Append(fbxVersion);
+                    versions.AppendLine();
+                }
             }
-          }
-          catch
-          {
-            // ignored
-          }
-          
-          try
-          {
-            videoVersion = new StringBuilder(SceneTrackVideo.Library.GetVersionStrCapacity());
-            int r = SceneTrackVideo.Library.GetVersion(videoVersion, (int) videoVersion.Capacity);
-            if (r == 0)
+            catch
             {
-              if (Application.platform == RuntimePlatform.WindowsEditor)
-              {
-                versions.Append("SceneTrackVideo.dll: ");
-              }
-              else if (Application.platform == RuntimePlatform.OSXEditor)
-              {
-                versions.Append("SceneTrackVideo.bundle: ");
-              }
-              versions.Append(videoVersion);
-              versions.AppendLine();
+                // ignored
             }
-          }
-          catch
-          {
-            // ignored
-          }
+            
+            try
+            {
+                midiVersion = new StringBuilder(SceneTrackMidi.Library.GetVersionStrCapacity());
+                int r = SceneTrackMidi.Library.GetVersion(midiVersion, (int) midiVersion.Capacity);
+                if (r == 0)
+                {
+                    if (Application.platform == RuntimePlatform.WindowsEditor)
+                    {
+                        versions.Append("SceneTrackMidi.dll: ");
+                    }
+                    else if (Application.platform == RuntimePlatform.OSXEditor)
+                    {
+                        versions.Append("SceneTrackMidi.bundle: ");
+                    }
+                    versions.Append(midiVersion);
+                    versions.AppendLine();
+                }
+            }
+            catch
+            {
+                // ignored
+            }
+            
+            try
+            {
+                videoVersion = new StringBuilder(SceneTrackVideo.Library.GetVersionStrCapacity());
+                int r = SceneTrackVideo.Library.GetVersion(videoVersion, (int) videoVersion.Capacity);
+                if (r == 0)
+                {
+                    if (Application.platform == RuntimePlatform.WindowsEditor)
+                    {
+                        versions.Append("SceneTrackVideo.dll: ");
+                    }
+                    else if (Application.platform == RuntimePlatform.OSXEditor)
+                    {
+                        versions.Append("SceneTrackVideo.bundle: ");
+                    }
+                    versions.Append(videoVersion);
+                    versions.AppendLine();
+                }
+            }
+            catch
+            {
+                // ignored
+            }
 
-          if (versions.Length > 0)
-          {
-            GUILayout.Label("Library and Exporters versions:", EditorStyles.miniBoldLabel);
-            GUILayout.TextArea(versions.ToString(), EditorStyles.miniLabel);
-          }
-          
-        }
-
-        public static void SetupUnity()
-        {
-
-
-
-
-
+            if (versions.Length > 0)
+            {
+                GUILayout.Label("Library and Exporters versions:", EditorStyles.miniBoldLabel);
+                GUILayout.TextArea(versions.ToString(), EditorStyles.miniLabel);
+            }
         }
     }
 }

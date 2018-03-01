@@ -1,6 +1,20 @@
-﻿#define EXPORTER_IS_THREADED
+﻿// Copyright 2018 E*D Films. All Rights Reserved.
 
-// Commented out a bunch of stuff so it just doesnt give warnings for not used currently
+/**
+ * SceneTrackOutput.cs
+ *
+ * Output system calls to SceneTrack core
+ * 
+ * @author  dotBunny <hello@dotbunny.com>
+ * @version 1
+ * @since   1.0.0
+ */
+
+/// <summary>
+/// Tell SceneTrack's exporter to run threaded 
+/// </summary>
+#define EXPORTER_IS_THREADED
+
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -14,6 +28,9 @@ using UnityEngine;
 
 namespace SceneTrack.Unity.Editor
 {
+    /// <summary>
+    /// FBX Output Runner
+    /// </summary>
     public static class FbxOutputRunner
     {
         static bool _exporting = false;
@@ -38,18 +55,24 @@ namespace SceneTrack.Unity.Editor
             get { return _exportProgress; }
         }
 
-        public static bool StartExport(string srcPath_, string dstPath_)
+        /// <summary>
+        /// Start Export Process
+        /// </summary>
+        /// <param name="sourcePath">Input Path</param>
+        /// <param name="destinationPath">Output Path</param>
+        /// <returns>Was Successful?</returns>
+        public static bool StartExport(string sourcePath, string destinationPath)
         {
             if (IsExporting)
                 return false;
 
             var exportInfo = new ExportInfo()
             {
-                srcPath = srcPath_,
-                dstPath = dstPath_
+                srcPath = sourcePath,
+                dstPath = destinationPath
             };
 
-            _dstPath = dstPath_;
+            _dstPath = destinationPath;
             FBXOutput.SetupExport();
 
             _exportThread = new Thread(new ParameterizedThreadStart(ExportThreadFn));
@@ -58,6 +81,10 @@ namespace SceneTrack.Unity.Editor
             return true;
         }
 
+        /// <summary>
+        /// Callback used when export finished.
+        /// </summary>
+        /// <returns>Output path</returns>
         public static String ReceiveExport()
         {
             _exportSuccessfull = -1;
@@ -65,11 +92,18 @@ namespace SceneTrack.Unity.Editor
             return _dstPath;
         }
 
+        /// <summary>
+        /// Temp Info Storage
+        /// </summary>
         class ExportInfo
         {
             public String srcPath, dstPath;
         }
 
+        /// <summary>
+        /// Threaded Export Function
+        /// </summary>
+        /// <param name="exportInfoObj">Info Storage Object</param>
         static void ExportThreadFn(object exportInfoObj)
         {
             if (_exporting)
@@ -170,8 +204,14 @@ namespace SceneTrack.Unity.Editor
         FBX = 0
     }
 
+    /// <summary>
+    /// FBX Output
+    /// </summary>
     public static class FBXOutput
     {
+        /// <summary>
+        /// FBX File Version
+        /// </summary>
         public static class FbxFileVersion
         {
             public const int FBX_53_MB55 = (0);
@@ -190,6 +230,9 @@ namespace SceneTrack.Unity.Editor
             public const int FBX_201600 = (13);
         }
 
+        /// <summary>
+        ///  FBX Axis Setting
+        /// </summary>
         public enum FbxAxis
         {
             NX,
@@ -345,7 +388,7 @@ namespace SceneTrack.Unity.Editor
             get { return UnityEditor.EditorPrefs.GetBool("SceneTrack_RewindTriangle", false); }
             set { UnityEditor.EditorPrefs.SetBool("SceneTrack_RewindTriangle", value); }
         }
-        
+
         private static void SetupSwizzle(int node, int trsMask, int srcAxis, FbxAxis axis)
         {
             switch (axis)
